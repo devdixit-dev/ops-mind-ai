@@ -3,17 +3,21 @@ import 'dotenv/config';
 import connectToDatabase from './config/db.config.js';
 
 import { uploader } from './middleware/multer.middleware.js';
+
 import { pdfToText } from './services/pdfToText.service.js';
-import { textToChunks } from './utils/chunkingText.util.js';
+import { textToChunks } from './services/chunkingText.service.js';
 import { chunksEmbedding } from './services/textEmbeddings.service.js';
 import { storeEmbeddings } from './services/storeEmbeddings.service.js';
 
 import Document from './models/document.model.js';
+import AuthRouter from './routes/auth.route.js';
 
 const app = express();
 const port = process.env.PORT || 3030;
 
 connectToDatabase();
+
+app.use('/api/auth', AuthRouter);
 
 app.get("/", (req, res) => {
   res.send('Home page of Chat PDF AI');
