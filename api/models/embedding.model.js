@@ -33,7 +33,7 @@ const EmbeddingSchema = new Schema({
 
   embeddingDimension: {
     type: Number,
-    default: 768, // set this once and never lie about it
+    default: 768,
     immutable: true,
   },
 }, { timestamps: true });
