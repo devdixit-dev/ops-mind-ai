@@ -1,5 +1,6 @@
 import Company from "../models/company.model.js";
-import User from "../models/user.model.js";
+import emailQueue from "../queues/email.queue.js";
+import { getWelcomeEmail } from "../templates/auth.template.js";
 import { hashPassword } from "../utils/bcrypt.util.js";
 import handleResponse from "../utils/handleResponse.util.js";
 
@@ -30,6 +31,11 @@ export const AuthInit = async (req, res) => {
     });
 
     // todo: send welcome email to the newUser.email
+    await emailQueue.add('emailQueue', {
+      to: newCompany.companyAdmin.email,
+      subject: 'Welcome to the OpsMind AI',
+      html: getWelcomeEmail(newCompany.companyAdmin.fullname, newCompany.companyAdmin.email)
+    });
 
     return handleResponse(
       res, 201, true, "Account created successfully", newCompany
