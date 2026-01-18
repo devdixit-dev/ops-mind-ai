@@ -14,7 +14,8 @@ const UserSchema = new mongoose.Schema({
     index: true,
   },
   company: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Company',
     required: true,
   },
   password: {
@@ -25,7 +26,6 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Admin', 'Employee'],
     default: 'Employee'
   },
   isVerified: {
