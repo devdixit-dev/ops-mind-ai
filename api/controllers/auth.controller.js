@@ -15,7 +15,7 @@ export const AuthInit = async (req, res) => {
     const company = await Company.findOne({
       "companyAdmin.email": companyEmail
     })
-    .select("+password")
+    .select("+companyAdmin.password")
     .lean();
 
     if (company || company.isActive) return handleResponse(res, 400, false, "Account already exist");

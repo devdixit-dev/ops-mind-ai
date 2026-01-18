@@ -1,11 +1,12 @@
 {
-  "name": "chatpdf-ai",
+  "name": "opsmind-ai",
   "version": "1.0.0",
-  "description": "the backend api for chatpdf-ai",
+  "description": "the backend api for opsmind-ai",
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
+    "dev": "nodemon api/index.js",
+    "email": "nodemon api/workers/email.worker.js"
   },
   "keywords": [],
   "author": "Dev Dixit",

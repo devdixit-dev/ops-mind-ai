@@ -19,11 +19,12 @@ const CompanySchema = new mongoose.Schema({
       lowercase: true
     },
     password: {
-      select: false,
+      // select: false,
       type: String,
       required: true
     },
     role: {
+      type: String,
       default: "Admin"
     }
   },
@@ -32,8 +33,9 @@ const CompanySchema = new mongoose.Schema({
     ref: 'User'
   },
   companySOP: {
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'Document',
     type: String,
-    required: true,
   },
   isVerified: {
     type: Boolean,

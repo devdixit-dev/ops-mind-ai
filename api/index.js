@@ -11,16 +11,25 @@ import { storeEmbeddings } from './services/storeEmbeddings.service.js';
 
 import Document from './models/document.model.js';
 import AuthRouter from './routes/auth.route.js';
+import AdminRouter from './routes/admin.route.js';
+import UserRouter from './routes/user.route.js';
 
 const app = express();
 const port = process.env.PORT || 3030;
 
 connectToDatabase();
 
+app.use((req, _, next) => {
+  console.log(`${req.url} - ${req.method} - ${req.ip}`);
+  next();
+});
+
 app.use('/api/auth', AuthRouter);
+app.use('/api/admin', AdminRouter);
+app.use('/api/user', UserRouter);
 
 app.get("/", (req, res) => {
-  res.send('Home page of Chat PDF AI');
+  res.send('Home page of OpsMind AI');
 });
 
 app.post("/upload", uploader.single('file'), async (req, res) => {
