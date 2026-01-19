@@ -18,7 +18,7 @@ export const AuthInit = async (req, res) => {
     .select("+companyAdmin.password")
     .lean();
 
-    if (company || company.isActive) return handleResponse(res, 400, false, "Account already exist");
+    if (company) return handleResponse(res, 400, false, "Account already exist");
 
     const hash = await hashPassword(password, 10);
 
@@ -33,8 +33,12 @@ export const AuthInit = async (req, res) => {
     // todo: send welcome email to the newUser.email
     await emailQueue.add('emailQueue', {
       to: newCompany.companyAdmin.email,
-      subject: 'Welcome to the OpsMind AI',
-      html: getWelcomeEmail(newCompany.companyAdmin.fullname, newCompany.companyAdmin.email)
+      ...getWelcomeEmail(
+        newCompany.companyAdmin.fullname,
+        newCompany.companyAdmin.email
+      )
+      // subject: 'Welcome to the OpsMind AI',
+      // html: getWelcomeEmail(newCompany.companyAdmin.fullname, newCompany.companyAdmin.email)
     });
 
     return handleResponse(

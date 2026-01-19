@@ -3,6 +3,6 @@ import { AuthInit } from "../controllers/auth.controller.js";
 
 const AuthRouter = Router();
 
-AuthRouter.get("/init", AuthInit);
+AuthRouter.post("/init", AuthInit);
 
 export default AuthRouter;

@@ -4,7 +4,6 @@ const CompanySchema = new mongoose.Schema({
   companyName: {
     type: String,
     required: true,
-    lowercase: true,
     trim: true,
   },
   companyAdmin: {
@@ -15,11 +14,11 @@ const CompanySchema = new mongoose.Schema({
     },
     email: {
       type: String,
+      unique: true,
       required: true,
       lowercase: true
     },
     password: {
-      // select: false,
       type: String,
       required: true
     },

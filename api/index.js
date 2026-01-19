@@ -10,6 +10,7 @@ import { chunksEmbedding } from './services/textEmbeddings.service.js';
 import { storeEmbeddings } from './services/storeEmbeddings.service.js';
 
 import Document from './models/document.model.js';
+
 import AuthRouter from './routes/auth.route.js';
 import AdminRouter from './routes/admin.route.js';
 import UserRouter from './routes/user.route.js';
@@ -23,6 +24,8 @@ app.use((req, _, next) => {
   console.log(`${req.url} - ${req.method} - ${req.ip}`);
   next();
 });
+
+app.use(express.json());
 
 app.use('/api/auth', AuthRouter);
 app.use('/api/admin', AdminRouter);
