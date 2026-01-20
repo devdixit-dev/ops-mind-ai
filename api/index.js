@@ -16,7 +16,7 @@ import AdminRouter from './routes/admin.route.js';
 import UserRouter from './routes/user.route.js';
 
 const app = express();
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 4040;
 
 connectToDatabase();
 
