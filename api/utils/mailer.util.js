@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
@@ -12,6 +11,8 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (to, subject, html) => {
   try{
+    console.log(process.env.MAILJET_URI, process.env.MAILJET_PORT, process.env.MAILJET_USER, process.env.MAILJET_PASS);
+
     await transporter.sendMail({
       from: process.env.AUTHOR_EMAIL,
       to, subject, html

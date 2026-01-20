@@ -1,5 +1,7 @@
-import express from 'express';
 import 'dotenv/config';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+
 import connectToDatabase from './config/db.config.js';
 
 import { uploader } from './middleware/multer.middleware.js';
@@ -26,6 +28,7 @@ app.use((req, _, next) => {
 });
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/auth', AuthRouter);
 app.use('/api/admin', AdminRouter);
