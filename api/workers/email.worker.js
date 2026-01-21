@@ -10,7 +10,7 @@ const emailWorker = new Worker(
   },
   {
     connection: redis,
-    concurrency: 1
+    concurrency: 3
   }
 );
 

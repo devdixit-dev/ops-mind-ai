@@ -70,5 +70,6 @@ app.post("/upload", uploader.single('file'), async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`API is running at http://localhost:${port}`);
+  console.log(`API is running at http://localhost:${port} 🚀`);
+  console.log(`Node Environment - ${process.env.NODE_ENV}`);
 });

@@ -9,14 +9,12 @@ export const AuthInit = async (req, res) => {
     const { companyEmail, fullname, companyName, password } = req.body;
 
     if (!companyEmail || !fullname || !companyName || !password) {
-      return handleResponse(res, 411, false, "All fields are required!");
+      return handleResponse(res, 400, false, "All fields are required!");
     }
 
     const company = await Company.findOne({
       "companyAdmin.email": companyEmail
-    })
-    .select("+companyAdmin.password")
-    .lean();
+    }).lean();
 
     if (company) return handleResponse(res, 400, false, "Account already exist");
 
@@ -37,8 +35,6 @@ export const AuthInit = async (req, res) => {
         newCompany.companyAdmin.fullname,
         newCompany.companyAdmin.email
       )
-      // subject: 'Welcome to the OpsMind AI',
-      // html: getWelcomeEmail(newCompany.companyAdmin.fullname, newCompany.companyAdmin.email)
     });
 
     return handleResponse(
@@ -46,7 +42,7 @@ export const AuthInit = async (req, res) => {
     );
   }
   catch (error) {
-    console.error(`Error in auth init: ${error}`);
+    console.error("Error in auth init:", error);
     return handleResponse(res, 500, false, "Internal server error");
   }
 }
