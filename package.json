@@ -5,6 +5,7 @@
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
+    "build": "mkdir dist && babel api -s -d dist",
     "dev": "nodemon api/index.js",
     "email": "nodemon api/workers/email.worker.js"
   },

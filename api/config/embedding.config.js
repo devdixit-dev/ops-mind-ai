@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 
 export const embeddings = new GoogleGenerativeAIEmbeddings({

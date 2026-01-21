@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "rootDir": "./api",
+    "outDir": "./dist",
+    "allowJs": true,
+    "checkJs": false,
+    "strict": false,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true
+  }
+}
