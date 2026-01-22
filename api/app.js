@@ -16,6 +16,10 @@ const createServer = async () => {
   app.use('/api/admin', AdminRouter);
   app.use('/api/user', UserRouter);
 
+  app.get("/", (req, res) => {
+    res.send('Home page of OpsMind AI');
+  });
+
   app.use((req, _, next) => {
     console.log(`${req.url} - ${req.method} - ${req.ip}`);
     next();

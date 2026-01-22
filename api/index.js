@@ -1,75 +1,37 @@
-import 'dotenv/config';
-import express from 'express';
-import cookieParser from 'cookie-parser';
+import './config/env.bootstrap.js';
+import cluster from 'cluster';
+import os from 'os';
 
+import createServer from './app.js';
 import connectToDatabase from './config/db.config.js';
 
-import { uploader } from './middleware/multer.middleware.js';
+const port = process.env.PORT;
 
-import { pdfToText } from './services/pdfToText.service.js';
-import { textToChunks } from './services/chunkingText.service.js';
-import { chunksEmbedding } from './services/textEmbeddings.service.js';
-import { storeEmbeddings } from './services/storeEmbeddings.service.js';
+const startServer = async () => {
+  if (cluster.isPrimary) {
+    const cpus = os.cpus().length;
+    console.log(`MASTER: ${process.pid}`);
 
-import Document from './models/document.model.js';
+    for (let i = 0; i < cpus; i++) {
+      cluster.fork();
+    }
 
-import AuthRouter from './routes/auth.route.js';
-import AdminRouter from './routes/admin.route.js';
-import UserRouter from './routes/user.route.js';
-
-const app = express();
-const port = process.env.PORT || 4040;
-
-connectToDatabase();
-
-app.use((req, _, next) => {
-  console.log(`${req.url} - ${req.method} - ${req.ip}`);
-  next();
-});
-
-app.use(express.json());
-app.use(cookieParser());
-
-app.use('/api/auth', AuthRouter);
-app.use('/api/admin', AdminRouter);
-app.use('/api/user', UserRouter);
-
-app.get("/", (req, res) => {
-  res.send('Home page of OpsMind AI');
-});
-
-app.post("/upload", uploader.single('file'), async (req, res) => {
-  const file = req.file;
-  if(!file) return res.json({ success: false, message: 'Upload PDF file to continue' });
-
-  const doc = await Document.create({ filename: file.filename });
-
-  if(file.mimetype !== "application/pdf") {
-    return res.status(400).json({
-      success: false,
-      message: "Only PDF files are allowed"
+    cluster.on('exit', (worker) => {
+      console.error(
+        `Worker ${worker.process.pid} died. Restarting...`
+      );
+      cluster.fork();
+    })
+  } else {
+    const app = await createServer();
+    await connectToDatabase();
+    
+    app.listen(port, () => {
+      console.log(`API is running at http://localhost:${port} 🚀`);
+      console.log(`Node Environment - ${process.env.NODE_ENV}`);
+      console.log(`Worker ${process.pid} started and listening on port ${port}`);
     });
   }
+}
 
-  const pages = await pdfToText(file.path);
-  const chunks = textToChunks(pages, 400, 2);
-  const embeddedChunks = await chunksEmbedding(chunks);
-
-  console.log(`Total chunks: ${embeddedChunks.length}`);
-
-  await storeEmbeddings(doc._id, embeddedChunks);
-  doc.status = "ready";
-  await doc.save();
-
-  console.log(doc._id);
-
-  res.json({
-    success: true,
-    data: embeddedChunks
-  });
-});
-
-app.listen(port, () => {
-  console.log(`API is running at http://localhost:${port} 🚀`);
-  console.log(`Node Environment - ${process.env.NODE_ENV}`);
-});
+startServer();

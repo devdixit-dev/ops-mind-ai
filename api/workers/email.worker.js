@@ -1,3 +1,4 @@
+import '../config/env.bootstrap.js';
 import { Worker } from 'bullmq';
 import redis from '../config/redis.config.js';
 import sendEmail from '../utils/mailer.util.js';
