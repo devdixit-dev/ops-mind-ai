@@ -9,8 +9,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-console.log(process.env.MAILJET_URI, process.env.MAILJET_PORT, process.env.MAILJET_USER, process.env.MAILJET_PASS);
-
 const sendEmail = async (to, subject, html) => {
   try{
     await transporter.sendMail({
