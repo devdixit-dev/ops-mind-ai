@@ -34,6 +34,6 @@ export const uploader = multer({
   fileFilter: pdfFilter,
   limits: {
     files: 1,
-    fileSize: 10 * 1024 * 1024,
+    fileSize: 5 * 1024 * 1024, // 5mb max
   }
 });

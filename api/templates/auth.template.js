@@ -1,7 +1,7 @@
 // Welcome Email Template
 export const getWelcomeEmail = (userName, userEmail) => {
   return {
-    subject: `Welcome to [Your Company Name]! 🎉`,
+    subject: `Welcome to OpsMind AI! 🎉`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -31,21 +31,12 @@ export const getWelcomeEmail = (userName, userEmail) => {
               <li>Registration Date: ${new Date().toLocaleDateString()}</li>
             </ul>
             
-            <p>Here's what you can do next:</p>
-            <ul>
-              <li>Complete your profile</li>
-              <li>Explore our features</li>
-              <li>Connect with other users</li>
-            </ul>
-            
-            <a href="https://yourapp.com/dashboard" class="button">Get Started</a>
-            
             <p>If you have any questions, feel free to reach out to our support team.</p>
             
-            <p>Best regards,<br>The [Your Company] Team</p>
+            <p>Best regards,<br>The OpsMind AI Team</p>
           </div>
           <div class="footer">
-            <p>© ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} OpsMind AI. All rights reserved.</p>
             <p>You received this email because you signed up for an account.</p>
           </div>
         </div>
@@ -53,7 +44,7 @@ export const getWelcomeEmail = (userName, userEmail) => {
       </html>
     `,
     text: `
-      Welcome to [Your Company Name]!
+      Welcome to OpsMind AI!
       
       Hi ${userName},
       
@@ -63,10 +54,8 @@ export const getWelcomeEmail = (userName, userEmail) => {
       - Email: ${userEmail}
       - Registration Date: ${new Date().toLocaleDateString()}
       
-      Get started: https://yourapp.com/dashboard
-      
       Best regards,
-      The [Your Company] Team
+      The OpsMind AI Team
     `
   };
 }
@@ -117,10 +106,10 @@ export const getVerificationEmail = (userName, userEmail, otp, expiryMinutes) =>
             
             <p>If you didn't request this verification, please ignore this email or contact our support team.</p>
             
-            <p>Best regards,<br>The [Your Company] Team</p>
+            <p>Best regards,<br>The OpsMind AI Team</p>
           </div>
           <div class="footer">
-            <p>© ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} OpsMind AI. All rights reserved.</p>
             <p>This is an automated message, please do not reply.</p>
           </div>
         </div>

@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { AuthInit } from "../controllers/auth.controller.js";
+import { AuthInit, VerifyCompany } from "../controllers/auth.controller.js";
 
 const AuthRouter = Router();
 
 AuthRouter.post("/init", AuthInit);
+
+AuthRouter.post("/verify", VerifyCompany);
 
 export default AuthRouter;

@@ -28,12 +28,16 @@ export const AuthInit = async (req, res) => {
       }
     });
 
+    const { subject, html, text } = getWelcomeEmail(
+      newCompany.companyAdmin.fullname,
+      newCompany.companyAdmin.email
+    );
+
     await sendEmail(
       newCompany.companyAdmin.email,
-      ...getWelcomeEmail(
-        newCompany.companyAdmin.fullname,
-        newCompany.companyAdmin.email
-      )
+      subject,
+      html,
+      text
     );
 
     const filteredInfo = {
@@ -50,5 +54,15 @@ export const AuthInit = async (req, res) => {
   catch (error) {
     console.error("Error in auth init:", error);
     return handleResponse(res, 500, false, "Internal server error");
+  }
+}
+
+export const VerifyCompany = async (req, res) => {
+  try{
+    
+  }
+  catch(error) {
+    console.error("Error in company verification", error);
+    return handleResponse(res, 500, false, 'Internal servere error');
   }
 }
