@@ -1,5 +1,5 @@
 // Welcome Email Template
-export const getWelcomeEmail = (userName, userEmail) => {
+export const getWelcomeEmail = (userName, userEmail, otp) => {
   return {
     subject: `Welcome to OpsMind AI! 🎉`,
     html: `
@@ -53,6 +53,7 @@ export const getWelcomeEmail = (userName, userEmail) => {
       Account Details:
       - Email: ${userEmail}
       - Registration Date: ${new Date().toLocaleDateString()}
+      - Verification OTP: ${otp}
       
       Best regards,
       The OpsMind AI Team

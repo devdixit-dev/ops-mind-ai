@@ -1,12 +1,15 @@
 import bcrypt from "bcryptjs";
+
 import Company from "../models/company.model.js";
+import User from "../models/user.model.js";
+
 import { getWelcomeEmail } from "../templates/auth.template.js";
+
 import { hashPassword } from "../utils/bcrypt.util.js";
 import generateOTP from "../utils/genOtp.util.js";
 import handleResponse from "../utils/handleResponse.util.js";
 import { encodeJWT, verifyJWT } from "../utils/jwt.util.js";
 import sendEmail from "../utils/mailer.util.js";
-import User from "../models/user.model.js";
 
 export const AuthInit = async (req, res) => {
   try {
@@ -43,7 +46,8 @@ export const AuthInit = async (req, res) => {
 
     const { subject, html, text } = getWelcomeEmail(
       newCompany.companyAdmin.fullname,
-      newCompany.companyAdmin.email
+      newCompany.companyAdmin.email,
+      otp
     );
 
     await sendEmail(
@@ -161,6 +165,24 @@ export const Login = async (req, res) => {
   }
   catch (error) {
     console.error("Error in login", error);
+    return handleResponse(res, 500, false, 'Internal server error');
+  }
+}
+
+export const Logout = async (req, res) => {
+  try{
+    const token = req.cookie.v_token || req.cookie.a_token;
+    if(!token) return handleResponse(res, 404, false, 'Token not found');
+
+    res.clearCookie(token, {
+      httpOnly: true,
+      secure: false
+    });
+
+    return handleResponse(res, 200, true, 'Logged out successfully');
+  }
+  catch(error) {
+    console.error("Error in logging out", error);
     return handleResponse(res, 500, false, 'Internal server error');
   }
 }
