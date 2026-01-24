@@ -35,10 +35,13 @@ const createServer = async () => {
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            background: black
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: black
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -47,11 +50,10 @@ const createServer = async () => {
         }
 
         .container {
-            background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
             width: 100%;
+            height: 100%;
             padding: 60px 40px;
             text-align: center;
         }
@@ -81,6 +83,10 @@ const createServer = async () => {
             border-radius: 50px;
             padding: 12px 24px;
             margin-bottom: 50px;
+        }
+        
+        #author {
+            color: blue
         }
 
         .status-dot {
@@ -141,7 +147,6 @@ const createServer = async () => {
         .info-section {
             margin-top: 40px;
             padding-top: 40px;
-            border-top: 2px solid #f0f0f0;
         }
 
         .info-grid {
@@ -170,9 +175,8 @@ const createServer = async () => {
         }
 
         footer {
-            margin-top: 50px;
+            margin-top: 180px;
             padding-top: 30px;
-            border-top: 2px solid #f0f0f0;
             color: #999;
             font-size: 0.9em;
         }
@@ -206,7 +210,7 @@ const createServer = async () => {
 
         <footer>
             <p>&copy; 2026 Ops Mind AI Backend API. All rights reserved.</p>
-            <p>Developed by <a href="http://www.github.com/devdixit-dev" target="_blank">Dev Dixit</a></p>
+            <p>Developed by <a id="author" href="https://github.com/devdixit-dev" target="_blank">Dev Dixit</a></p>
         </footer>
     </div>
 </body>
