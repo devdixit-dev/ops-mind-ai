@@ -4,7 +4,7 @@ import handleResponse from "../utils/handleResponse.util.js";
 import { verifyJWT } from "../utils/jwt.util.js";
 
 
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
   try{
     const token = req.cookies.a_token;
     if(!token) return handleResponse(res, 403, false, 'Token not provided');
@@ -21,10 +21,12 @@ const auth = async (req, res, next) => {
   }
 }
 
-const isAdmin = async (req, res, next) => {
+export const isAdmin = async (req, res, next) => {
   try{
     const id = req.user.id;
     if(!id) return handleResponse(res, 403, false, 'User not found or error in something');
+
+    if(req.user.role !== "Admin") return handleResponse(res, 403, false, "Role mismatch detected");
 
     const user = await Company.findById(id).lean();
     if(!user) return handleResponse(res, 404, false, 'User not found or not exist');
