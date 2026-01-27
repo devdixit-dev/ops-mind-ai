@@ -214,7 +214,7 @@ const createServer = async () => {
         </footer>
     </div>
 </body>
-</html>  
+</html>
     `)
   });
 

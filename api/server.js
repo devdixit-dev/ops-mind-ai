@@ -33,4 +33,4 @@ const startServer = async () => {
   }
 }
 
-startServer();
+startServer().catch((e) => { console.error("Error in starting server", e.message) })

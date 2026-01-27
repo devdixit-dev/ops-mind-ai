@@ -1,12 +1,12 @@
 {
-  "name": "opsmind-ai",
+  "name": "ops-mind-ai",
   "version": "1.0.0",
-  "description": "the backend api for opsmind-ai",
-  "main": "api/index.js",
+  "description": "the backend api for ops-mind-ai",
+  "main": "api/server.js",
   "scripts": {
-    "start": "node api/index.js",
+    "start": "node api/server.js",
     "build": "mkdir dist && babel api -s -d dist",
-    "dev": "nodemon api/index.js",
+    "dev": "nodemon api/server.js",
     "email": "nodemon api/workers/email.worker.js"
   },
   "keywords": [],
