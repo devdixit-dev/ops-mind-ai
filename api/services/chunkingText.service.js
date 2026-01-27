@@ -1,24 +1,3 @@
-// // 2 - Text to chunks array
-
-// export const textToChunks = (text, chunkSize = 400, overlap = 100) => {
-//   if(!text || chunkSize <= overlap) return null;
-
-//   const chunks = [];
-//   let start = 0;
-
-//   while(start < text.length) {
-//     const end = start + chunkSize;
-//     const chunk = text.slice(start, end);
-
-//     chunks.push(chunk.trim());
-
-//     start = end - overlap;
-//   }
-
-//   return chunks;
-// }
-
-// utils/textToChunks.js
 export const textToChunks = (
   pages,
   chunkSize = 400,
